@@ -35,11 +35,37 @@ export function Footer() {
             <div>
               <h3 className="text-xl font-bold mb-4">Quick links</h3>
               <ul className="space-y-2">
+
                 <li>
                   <Link href="/search" className="text-gray-300 hover:text-white transition-colors">
                     Search
                   </Link>
                 </li>
+
+                <li>
+                  <Link href="/shipping-policy" className="text-gray-300 hover:text-white transition-colors">
+                    Shipping Policy
+                  </Link>
+                </li>
+
+                <li>
+                  <Link href="/refund-policy" className="text-gray-300 hover:text-white transition-colors">
+                    Refund Policy
+                  </Link>
+                </li>
+
+                <li>
+                  <Link href="/privacy-policy" className="text-gray-300 hover:text-white transition-colors">
+                    Privacy Policy
+                  </Link>
+                </li>
+
+                <li>
+                  <Link href="/terms-of-service" className="text-gray-300 hover:text-white transition-colors">
+                    Terms of Service
+                  </Link>
+                </li>
+
               </ul>
             </div>
 

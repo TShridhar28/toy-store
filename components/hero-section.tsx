@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { useCart } from "./cart-context"
 
 const bundles = [
-  { qty: 1, price: 1, originalPrice: 1500, savings: 951 },
+  { qty: 1, price: 499, originalPrice: 1500, savings: 951 },
   { qty: 2, price: 999, originalPrice: 3000, savings: 2001 },
   { qty: 4, price: 1999, originalPrice: 6000, savings: 4001 },
 ]
