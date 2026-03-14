@@ -33,24 +33,14 @@ export function Footer() {
 
             {/* Quick Links */}
             <div>
-              <h3 className="text-xl font-bold mb-4">Quick links</h3>
+              <h3 className="text-xl font-bold mb-4">Quick Links</h3>
               <ul className="space-y-2">
 
-                <li>
-                  <Link href="/search" className="text-gray-300 hover:text-white transition-colors">
-                    Search
-                  </Link>
-                </li>
+            
 
                 <li>
-                  <Link href="/shipping-policy" className="text-gray-300 hover:text-white transition-colors">
-                    Shipping Policy
-                  </Link>
-                </li>
-
-                <li>
-                  <Link href="/refund-policy" className="text-gray-300 hover:text-white transition-colors">
-                    Refund Policy
+                  <Link href="/contact" className="text-gray-300 hover:text-white transition-colors">
+                    Contact Us
                   </Link>
                 </li>
 
@@ -61,8 +51,20 @@ export function Footer() {
                 </li>
 
                 <li>
-                  <Link href="/terms-of-service" className="text-gray-300 hover:text-white transition-colors">
-                    Terms of Service
+                  <Link href="/terms-conditions" className="text-gray-300 hover:text-white transition-colors">
+                    Terms & Conditions
+                  </Link>
+                </li>
+
+                <li>
+                  <Link href="/refund-policy" className="text-gray-300 hover:text-white transition-colors">
+                    Refund Policy
+                  </Link>
+                </li>
+
+                <li>
+                  <Link href="/shipping-policy" className="text-gray-300 hover:text-white transition-colors">
+                    Shipping Policy
                   </Link>
                 </li>
 

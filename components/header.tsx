@@ -33,16 +33,7 @@ export function Header() {
         <div className="flex items-center gap-8">
           {/* Desktop Menu */}
           <ul className="hidden md:flex items-center gap-6 text-sm font-medium">
-            <li>
-              <Link href="/" className="hover:text-accent transition-colors">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link href="/catalog" className="hover:text-accent transition-colors">
-                Catalog
-              </Link>
-            </li>
+            
             <li>
               <Link href="/contact" className="hover:text-accent transition-colors">
                 Contact
@@ -76,12 +67,7 @@ export function Header() {
 
         {/* Right Actions */}
         <div className="flex items-center gap-4">
-          <button className="hover:text-accent transition-colors" aria-label="Search">
-            <Search className="h-5 w-5" />
-          </button>
-          <button className="hover:text-accent transition-colors" aria-label="Account">
-            <User className="h-5 w-5" />
-          </button>
+          
           <button
             onClick={() => setIsCartOpen(true)}
             className="hover:text-accent transition-colors relative"
