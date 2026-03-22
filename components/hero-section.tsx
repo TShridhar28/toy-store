@@ -42,7 +42,7 @@ export function HeroSection() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
 
-          {/* Image Gallery */}
+          {/* Image Section */}
           <div className="flex flex-col items-center gap-2">
             <div className="relative w-full max-w-md aspect-square rounded-xl overflow-hidden bg-muted shadow-md">
               <Image
@@ -50,7 +50,7 @@ export function HeroSection() {
                 alt="Stress Key"
                 fill
                 priority
-                className="object-cover"
+                className="object-cover transition-all duration-300"
               />
             </div>
 
@@ -93,12 +93,10 @@ export function HeroSection() {
               </span>
             </div>
 
-            {/* Title */}
             <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
               Stress Key
             </h1>
 
-            {/* Benefits */}
             <ul className="space-y-2">
               {[
                 "Satisfying tactile click",
@@ -112,7 +110,6 @@ export function HeroSection() {
               ))}
             </ul>
 
-            {/* Offer */}
             <div className="inline-flex w-fit">
               <span className="border border-accent text-accent px-3 py-1 text-xs font-semibold rounded-md">
                 ₹50 OFF on prepaid orders
@@ -131,54 +128,71 @@ export function HeroSection() {
               </div>
 
               <div className="space-y-2">
-                {bundles.map((bundle, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setSelectedBundle(index)}
-                    className={`w-full rounded-lg border p-3 flex items-center justify-between transition-all relative ${
-                      selectedBundle === index
-                        ? "border-accent bg-secondary shadow-sm"
-                        : "border-border hover:border-accent/40"
-                    } ${bundle.popular ? "scale-[1.02]" : ""}`}
-                  >
+                {bundles.map((bundle, index) => {
+                  const isSelected = selectedBundle === index
+                  const isBuy4 = bundle.qty === 4
 
-                    {bundle.popular && (
-                      <span className="absolute -top-2 right-2 bg-accent text-white text-[10px] px-2 py-0.5 rounded-full">
-                        MOST POPULAR
-                      </span>
-                    )}
+                  return (
+                    <button
+                      key={index}
+                      onClick={() => setSelectedBundle(index)}
+                      className={`w-full rounded-lg border p-3 flex items-center justify-between relative overflow-visible transition-all
+                      ${
+                        isSelected
+                          ? "border-accent bg-secondary shadow-sm"
+                          : "border-border hover:border-accent/40"
+                      }
+                      ${bundle.popular ? "scale-[1.02]" : ""}
+                      ${isBuy4 ? "shine-effect" : ""}
+                      `}
+                    >
 
-                    <div className="flex items-center gap-2">
-                      <div
-                        className={`h-4 w-4 rounded-full border flex items-center justify-center ${
-                          selectedBundle === index
-                            ? "border-accent"
-                            : "border-muted-foreground"
-                        }`}
-                      >
-                        {selectedBundle === index && (
-                          <div className="h-2 w-2 rounded-full bg-accent" />
-                        )}
+                      {/* BEST VALUE TAG */}
+                      {isBuy4 && (
+                        <span className="absolute -top-2 left-2 bg-green-500 text-white text-[10px] px-2 py-0.5 rounded-full">
+                          BEST VALUE
+                        </span>
+                      )}
+
+                      {/* MOST POPULAR */}
+                      {bundle.popular && (
+                        <span className="absolute -top-2 right-2 bg-accent text-white text-[10px] px-2 py-0.5 rounded-full">
+                          MOST POPULAR
+                        </span>
+                      )}
+
+                      <div className="flex items-center gap-2">
+                        <div
+                          className={`h-4 w-4 rounded-full border flex items-center justify-center ${
+                            isSelected
+                              ? "border-accent"
+                              : "border-muted-foreground"
+                          }`}
+                        >
+                          {isSelected && (
+                            <div className="h-2 w-2 rounded-full bg-accent" />
+                          )}
+                        </div>
+
+                        <div className="text-left">
+                          <p className="text-sm font-semibold">Buy {bundle.qty}</p>
+                          <p className="text-xs text-muted-foreground">
+                            Save ₹{bundle.savings.toLocaleString()}
+                          </p>
+                        </div>
                       </div>
 
-                      <div className="text-left">
-                        <p className="text-sm font-semibold">Buy {bundle.qty}</p>
-                        <p className="text-xs text-muted-foreground">
-                          Save ₹{bundle.savings.toLocaleString()}
+                      <div className="text-right">
+                        <p className="font-bold text-base text-accent">
+                          ₹{bundle.price.toLocaleString()}
+                        </p>
+                        <p className="text-xs line-through text-muted-foreground">
+                          ₹{bundle.originalPrice.toLocaleString()}
                         </p>
                       </div>
-                    </div>
-
-                    <div className="text-right">
-                      <p className="font-bold text-base text-accent">
-                        ₹{bundle.price.toLocaleString()}
-                      </p>
-                      <p className="text-xs line-through text-muted-foreground">
-                        ₹{bundle.originalPrice.toLocaleString()}
-                      </p>
-                    </div>
-                  </button>
-                ))}
+                    </button>
+                  )
+                })}
               </div>
 
               <Button
