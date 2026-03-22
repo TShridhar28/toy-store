@@ -24,6 +24,10 @@ export function HeroSection() {
   const [activeImage, setActiveImage] = useState(0)
   const { addToCart } = useCart()
 
+  // swipe state
+  const [touchStart, setTouchStart] = useState<number | null>(null)
+  const [touchEnd, setTouchEnd] = useState<number | null>(null)
+
   const handleAddToCart = () => {
     const bundle = bundles[selectedBundle]
 
@@ -42,35 +46,44 @@ export function HeroSection() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
 
-          {/* Image Section */}
-          <div className="flex flex-col items-center gap-2">
-            <div className="relative w-full max-w-md aspect-square rounded-xl overflow-hidden bg-muted shadow-md">
-              <Image
-                src={PRODUCT_IMAGES[activeImage]}
-                alt="Stress Key"
-                fill
-                priority
-                className="object-cover transition-all duration-300"
-              />
-            </div>
+         <div className="flex flex-col items-center gap-2">
+  <div
+    className="w-full max-w-md aspect-square rounded-xl overflow-x-auto overflow-y-hidden flex snap-x snap-mandatory scroll-smooth"
+  >
+    {PRODUCT_IMAGES.map((img, index) => (
+      <div
+        key={index}
+        className="min-w-full h-full relative snap-center"
+      >
+        <Image
+          src={img}
+          alt={`slide-${index}`}
+          fill
+          className="object-cover"
+        />
+      </div>
+    ))}
+  </div>
 
-            <div className="flex gap-2">
-              {PRODUCT_IMAGES.map((img, index) => (
-                <button
-                  key={index}
-                  onClick={() => setActiveImage(index)}
-                  className={`relative w-12 h-12 rounded-md overflow-hidden border ${
-                    activeImage === index
-                      ? "border-accent"
-                      : "border-border"
-                  }`}
-                >
-                  <Image src={img} alt={`thumb-${index}`} fill className="object-cover" />
-                </button>
-              ))}
-            </div>
-          </div>
-
+  {/* Thumbnails */}
+  <div className="flex gap-2">
+    {PRODUCT_IMAGES.map((img, index) => (
+      <button
+        key={index}
+        onClick={() => {
+          const container = document.querySelector(".snap-x")
+          container?.scrollTo({
+            left: index * container.clientWidth,
+            behavior: "smooth",
+          })
+        }}
+        className="relative w-12 h-12 rounded-md overflow-hidden border"
+      >
+        <Image src={img} alt={`thumb-${index}`} fill className="object-cover" />
+      </button>
+    ))}
+  </div>
+</div>
           {/* Product Info */}
           <div className="flex flex-col gap-4 max-w-lg">
 
@@ -136,7 +149,7 @@ export function HeroSection() {
                     <button
                       key={index}
                       onClick={() => setSelectedBundle(index)}
-                      className={`w-full rounded-lg border p-3 flex items-center justify-between relative overflow-visible transition-all
+                      className={`w-full rounded-lg border p-3 flex items-center justify-between relative transition-all
                       ${
                         isSelected
                           ? "border-accent bg-secondary shadow-sm"
@@ -146,15 +159,12 @@ export function HeroSection() {
                       ${isBuy4 ? "shine-effect" : ""}
                       `}
                     >
-
-                      {/* BEST VALUE TAG */}
                       {isBuy4 && (
                         <span className="absolute -top-2 left-2 bg-green-500 text-white text-[10px] px-2 py-0.5 rounded-full">
                           BEST VALUE
                         </span>
                       )}
 
-                      {/* MOST POPULAR */}
                       {bundle.popular && (
                         <span className="absolute -top-2 right-2 bg-accent text-white text-[10px] px-2 py-0.5 rounded-full">
                           MOST POPULAR
